@@ -9,21 +9,29 @@ import UIKit
 
 class MyWishlistViewController: UIViewController {
 
+    var Wishlist:WishListModel?
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var summaryLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if let Wishlist = Wishlist {
+            titleLabel.text = Wishlist.title
+            genreLabel.text = Wishlist.genreType
+            authorLabel.text = Wishlist.authorName
+            summaryLabel.text = Wishlist.description
+        }
         // Do any additional setup after loading the view.
     }
     
 
     /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
+      
     */
 
 }

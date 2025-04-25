@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct BookModel{
+    var title:String
+    var authorName:String
+    var genreType:String
+    var description:String
+    var currentUserID:String
+}

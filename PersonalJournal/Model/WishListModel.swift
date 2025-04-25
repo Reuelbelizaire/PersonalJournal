@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct WishListModel{
+    var title:String
+    var authorName:String
+    var genreType:String
+    var description:String
+    var currentUserID:String
+}
