@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.reuelBelizaire.FlaglerStudent</string>
+	<string>com.ReuelBelizaire.PersonalJournal</string>
 	<key>PROJECT_ID</key>
 	<string>mobileappproj-2e4d3</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:822427480419:ios:32911aec429cb1a59fe356</string>
+	<string>1:822427480419:ios:ce61bfc304730cd39fe356</string>
 </dict>
 </plist>
