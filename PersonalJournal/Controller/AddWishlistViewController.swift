@@ -34,6 +34,7 @@ class WishlistViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    //adds the necessary information to the wishlist
     @IBAction func addWishlistPressed(_ sender: Any) {
         guard let title = titleTextBox.text, !title.isEmpty else {
             validationLabel.text = "Please enter a valid course ID."
