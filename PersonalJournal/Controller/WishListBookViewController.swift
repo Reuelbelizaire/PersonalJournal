@@ -23,10 +23,11 @@ class WishlistBookViewController: UIViewController, UITableViewDataSource, UITab
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        loadWishlistBooks()
+        //loadWishlistBooks()
     }
         override func viewWillAppear(_ animated: Bool) {
                 super.viewWillAppear(animated)
+                wishlistBooks = []
                 loadWishlistBooks()
             }
 
@@ -36,9 +37,8 @@ class WishlistBookViewController: UIViewController, UITableViewDataSource, UITab
                     return
                 }
                 
-                wishlistBooks.removeAll()
                 
-                db.collection("WishlistBooks")
+                db.collection("WishList")
                     .whereField("UserID", isEqualTo: currentUserID)
                     .order(by: "Date")
                     .getDocuments { (querySnapshot, error) in
@@ -49,10 +49,10 @@ class WishlistBookViewController: UIViewController, UITableViewDataSource, UITab
                             if let snapshotDocuments = querySnapshot?.documents {
                                 for doc in snapshotDocuments {
                                     let data = doc.data()
-                                    if let title = data["title"] as? String,
-                                       let authorName = data["authorName"] as? String,
+                                    if let title = data["BookTitle"] as? String,
+                                       let authorName = data["Author"] as? String,
                                        let genreType = data["genreType"] as? String,
-                                       let description = data["description"] as? String {
+                                       let description = data["Description"] as? String {
                                         
                                         let newWishlistBook = WishListModel(
                                             title: title,
@@ -81,7 +81,7 @@ class WishlistBookViewController: UIViewController, UITableViewDataSource, UITab
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
                 let wishlistBook = wishlistBooks[indexPath.row]
                 cell.textLabel?.text = "\(wishlistBook.title) by \(wishlistBook.authorName)"
-                cell.detailTextLabel?.text = wishlistBook.genreType
+                //cell.detailTextLabel?.text = wishlistBook.genreType
                 return cell
             }
             
@@ -98,9 +98,10 @@ class WishlistBookViewController: UIViewController, UITableViewDataSource, UITab
                     
                     let bookToDelete = self.wishlistBooks[indexPath.row]
                     
-                    self.db.collection("WishlistBooks")
-                        .whereField("title", isEqualTo: bookToDelete.title)
-                        .whereField("authorName", isEqualTo: bookToDelete.authorName)
+                    //deletes from firestone
+                    self.db.collection("WishList")
+                        .whereField("BookTitle", isEqualTo: bookToDelete.title)
+                        .whereField("Author", isEqualTo: bookToDelete.authorName)
                         .whereField("UserID", isEqualTo: currentUserID)
                         .getDocuments { (snapshot, error) in
                             if let error = error {
@@ -112,6 +113,7 @@ class WishlistBookViewController: UIViewController, UITableViewDataSource, UITab
                                         print("Error deleting wishlist book: \(error.localizedDescription)")
                                         completionHandler(false)
                                     } else {
+                                        //removes specific row
                                         self.wishlistBooks.remove(at: indexPath.row)
                                         tableView.deleteRows(at: [indexPath], with: .automatic)
                                         completionHandler(true)
@@ -131,11 +133,12 @@ class WishlistBookViewController: UIViewController, UITableViewDataSource, UITab
                 let selectedWishlistBook = wishlistBooks[indexPath.row]
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let detailVC = storyboard.instantiateViewController(withIdentifier: "MyWishlistBookViewController") as? MyWishlistBookViewController {
-                    detailVC.WishlistBook = selectedWishlistBook
+                if let detailVC = storyboard.instantiateViewController(withIdentifier: "MyWishlistViewController") as? MyWishlistViewController {
+                    detailVC.Wishlist = selectedWishlistBook
                     navigationController?.pushViewController(detailVC, animated: true)
                 }
             }
-        }
-        }
+}
     
+    
+

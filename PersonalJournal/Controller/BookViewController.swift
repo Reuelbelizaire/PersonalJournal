@@ -13,14 +13,7 @@ import FirebaseAuth
 
 class BookViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    struct BookModel {
-        var title: String
-        var authorName: String
-        var genreType: String
-        var description: String
-        var documentID: String
-        var currentUserID:String
-    }
+    
     
     private let cellIdentifier = "BookCell"
     var books: [BookModel] = []
@@ -32,11 +25,13 @@ class BookViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        loadBooks()
+        //loadBooks()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //gets rid of duplicate books
+        books = []
         loadBooks()
     }
 
@@ -68,13 +63,11 @@ class BookViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                     authorName: authorName,
                                     genreType: genreType,
                                     description: description,
-                                    documentID: doc.documentID,
                                     currentUserID: currentUserID
                                 )
                                 self.books.append(newBook)
                             }
                         }
-                        
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
@@ -107,7 +100,7 @@ class BookViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
             
             let bookToDelete = self.books[indexPath.row]
-            
+            // deletes from firestone database
             self.db.collection("Books")
                 .whereField("title", isEqualTo: bookToDelete.title)
                 .whereField("authorName", isEqualTo: bookToDelete.authorName)
@@ -142,7 +135,7 @@ class BookViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let detailVC = storyboard.instantiateViewController(withIdentifier: "MyBookViewController") as? MyBookViewController {
-            detailVC.Book = selectedBook
+          detailVC.Book = selectedBook
             navigationController?.pushViewController(detailVC, animated: true)
         }
     }

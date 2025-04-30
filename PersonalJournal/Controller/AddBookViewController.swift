@@ -21,36 +21,39 @@ class AddBookViewController: UIViewController {
 
     let db = Firestore.firestore()
 
-    @IBOutlet weak var titleTextBox: UITextField!
-    @IBOutlet weak var authorTextBox: UITextField!
     
-    @IBOutlet weak var validatorLabel: UILabel!
-    @IBOutlet weak var genreTextBox: UITextField!
-    @IBOutlet weak var summaryTextBox: UITextField!
+    @IBOutlet weak var bookTitleLabel: UITextField!
+    @IBOutlet weak var bookGenreLabel: UITextField!
+    @IBOutlet weak var bookAuthorLabel: UITextField!
+    @IBOutlet weak var bookSummary: UITextField!
     
-    
+    @IBOutlet weak var popUpLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        validatorLabel.text = ""
+        popUpLabel.text = ""
         // Do any additional setup after loading the view.
     }
     
 
     @IBAction func addBookPressed(_ sender: UIButton) {
         
-        guard let title = titleTextBox.text, !title.isEmpty else {
-            validatorLabel.text = "Please enter a valid course ID."
+        guard let title = bookTitleLabel.text, !title.isEmpty else {
+            popUpLabel.text = "Please enter a valid course ID."
             return
         }
         
-        guard let authorName = authorTextBox.text, !authorName.isEmpty else {
-            validatorLabel.text = "Please enter a valid course name."
+        guard let authorName = bookAuthorLabel.text, !authorName.isEmpty else {
+            popUpLabel.text = "Please enter a valid course name."
             return
         }
         
-        guard let genreType = genreTextBox.text, !genreType.isEmpty else {
-            validatorLabel.text = "Please enter a valid course name."
+        guard let genreType = bookGenreLabel.text, !genreType.isEmpty else {
+            popUpLabel.text = "Please enter a valid course name."
+            return
+        }
+        guard let description = bookSummary.text, !description.isEmpty else {
+            popUpLabel.text = "Please enter a valid course name."
             return
         }
         
@@ -66,12 +69,12 @@ class AddBookViewController: UIViewController {
         ]) { error in
             if let e = error {
                 print("There was an issue saving course to Firestore: \(e)")
-                self.validatorLabel.text = "Failed to save course."
-                self.validatorLabel.textColor = .systemRed
+                self.popUpLabel.text = "Failed to save course."
+                self.popUpLabel.textColor = .systemRed
             } else {
                 print("Successfully saved course.")
-                self.validatorLabel.text = "Course added successfully!"
-                self.validatorLabel.textColor = .systemGreen
+                self.popUpLabel.text = "Course added successfully!"
+                self.popUpLabel.textColor = .systemGreen
                 self.clearFields()
             }
         }
@@ -79,11 +82,9 @@ class AddBookViewController: UIViewController {
     
     
     private func clearFields() {
-        titleTextBox.text = ""
-        authorTextBox.text = ""
-        genreTextBox.text = ""
-        summaryTextBox.text = ""
+        bookTitleLabel.text = ""
+        bookAuthorLabel.text = ""
+        bookGenreLabel.text = ""
+        bookSummary.text = ""
     }
-   
-
 }
