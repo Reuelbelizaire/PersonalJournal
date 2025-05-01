@@ -37,21 +37,21 @@ class WishlistViewController: UIViewController {
     //adds the necessary information to the wishlist
     @IBAction func addWishlistPressed(_ sender: Any) {
         guard let title = titleTextBox.text, !title.isEmpty else {
-            validationLabel.text = "Please enter a valid course ID."
+            validationLabel.text = "Please enter a title"
             return
         }
         
         guard let authorName = authorTextBox.text, !authorName.isEmpty else {
-            validationLabel.text = "Please enter a valid course name."
+            validationLabel.text = "Please enter a author name."
             return
         }
         
         guard let genreType = genreTextBox.text, !genreType.isEmpty else {
-            validationLabel.text = "Please enter a valid course name."
+            validationLabel.text = "Please enter a genre."
             return
         }
         guard let description = summaryTextBox.text, !description.isEmpty else {
-            validationLabel.text = "Please enter a valid course name."
+            validationLabel.text = "Please enter a description."
             return
         }
         
@@ -69,11 +69,11 @@ class WishlistViewController: UIViewController {
         ]) { error in
             if let e = error {
                 print("There was an issue saving course to Firestore: \(e)")
-                self.validationLabel.text = "Failed to save course."
+              self.validationLabel.text = "Failed to save book."
                 self.validationLabel.textColor = .systemRed
             } else {
-                print("Successfully saved course.")
-                self.validationLabel.text = "Course added successfully!"
+                print("Successfully saved Book.")
+                self.validationLabel.text = "Book added to wishlist!"
                 self.validationLabel.textColor = .systemGreen
                 self.clearFields()
             }

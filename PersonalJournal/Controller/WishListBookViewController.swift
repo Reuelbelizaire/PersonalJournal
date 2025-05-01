@@ -81,7 +81,7 @@ class WishlistBookViewController: UIViewController, UITableViewDataSource, UITab
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
                 let wishlistBook = wishlistBooks[indexPath.row]
                 cell.textLabel?.text = "\(wishlistBook.title) by \(wishlistBook.authorName)"
-                //cell.detailTextLabel?.text = wishlistBook.genreType
+                cell.detailTextLabel?.text = wishlistBook.genreType
                 return cell
             }
             

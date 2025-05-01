@@ -15,7 +15,7 @@ struct BookOfTheDay{
     var imageName:String
 }
 
-//dictionary
+//Array
 class bookOfTheDay{
     private let RandomBook = [
     BookOfTheDay(
@@ -26,7 +26,7 @@ class bookOfTheDay{
         imageName: "Finn"
     ),
     BookOfTheDay(
-        title:"The Boy in the Striped Pyjamas",
+        title:"The Boy in the Striped Pajamas",
         authorName:"John Boyne",
         genreType:"Historical Fiction",
         description:"tells the story of Bruno, a young boy whose family moves from Berlin to a desolate area near a concentration camp, Auschwitz, after his father is appointed commandant",

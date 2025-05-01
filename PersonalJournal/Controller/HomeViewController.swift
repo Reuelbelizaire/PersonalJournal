@@ -23,8 +23,8 @@ class HomeViewController: UIViewController {
     @IBAction func funnyPressed(_ sender: Any) {
         
         UIView.animate(withDuration: 0.5) { [self] in
-            self.funnyLabel.isHidden.toggle()
-            funnyLabel.text = inspiration[Int.random(in: 0...2)]
+        self.funnyLabel.isHidden.toggle()
+        funnyLabel.text = inspiration[Int.random(in: 0...2)]
         }
     }
     

@@ -39,21 +39,21 @@ class AddBookViewController: UIViewController {
     @IBAction func addBookPressed(_ sender: UIButton) {
         
         guard let title = bookTitleLabel.text, !title.isEmpty else {
-            popUpLabel.text = "Please enter a valid course ID."
+            popUpLabel.text = "Please enter a book title."
             return
         }
         
         guard let authorName = bookAuthorLabel.text, !authorName.isEmpty else {
-            popUpLabel.text = "Please enter a valid course name."
+            popUpLabel.text = "Please enter an author."
             return
         }
         
         guard let genreType = bookGenreLabel.text, !genreType.isEmpty else {
-            popUpLabel.text = "Please enter a valid course name."
+            popUpLabel.text = "Please enter a genre."
             return
         }
         guard let description = bookSummary.text, !description.isEmpty else {
-            popUpLabel.text = "Please enter a valid course name."
+            popUpLabel.text = "Please give us a summary."
             return
         }
         
@@ -69,11 +69,11 @@ class AddBookViewController: UIViewController {
         ]) { error in
             if let e = error {
                 print("There was an issue saving course to Firestore: \(e)")
-                self.popUpLabel.text = "Failed to save course."
+                self.popUpLabel.text = "Failed to save book."
                 self.popUpLabel.textColor = .systemRed
             } else {
                 print("Successfully saved course.")
-                self.popUpLabel.text = "Course added successfully!"
+                self.popUpLabel.text = "Book added successfully!"
                 self.popUpLabel.textColor = .systemGreen
                 self.clearFields()
             }
