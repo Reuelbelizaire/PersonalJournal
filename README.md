@@ -1,0 +1,1 @@
+This mini project is made to help users keep track of books they have read or want to read by using a login to keep track of specific user's information while also using firebase to hold the information and authenticate user's while in this app I utilize an array that will reccomend a book of the day to user's 
